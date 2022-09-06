@@ -2,11 +2,16 @@ from datetime import date, datetime
 
 import numpy as np
 
+from ООП.OOP_Employee_Prct2.exception import EmailAlreadyExistsException
+
 
 class Employee:
-    def __init__(self, first_name: str, salary_day: int):
+    def __init__(self, first_name: str, salary_day: int, email):
         self.first_name = first_name
         self.salary_day = salary_day
+        self.email = email
+        self.validate()
+        self.save_email()
 
     @staticmethod
     def work():
@@ -45,3 +50,12 @@ class Employee:
         work_day = work_day + 1
         salary_working_day = self.salary_day * work_day
         return salary_working_day
+
+    def save_email(self):
+        with open('emails.txt', 'a+') as fe:
+            fe.write(self.email + '\n')
+
+    def validate(self):
+        with open('emails.txt', 'r') as read_file:
+            if self.email in read_file.read():
+                raise EmailAlreadyExistsException('Email is already taken!')
