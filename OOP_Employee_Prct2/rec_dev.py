@@ -2,7 +2,6 @@ from employee import Employee
 
 
 class Recruiter(Employee):
-    position = 'Recruiter'
 
     def __init__(self, first_name: str, salary_day: int):
         super().__init__(first_name, salary_day)
@@ -16,7 +15,6 @@ class Recruiter(Employee):
 
 
 class Developer(Employee):
-    position = 'Developer'
 
     def __init__(self, first_name: str, salary_day: int, tech_stack):
         super().__init__(first_name, salary_day)
@@ -36,6 +34,6 @@ class Developer(Employee):
     def __add__(self, other):
         return Developer(
             first_name=f'{self.first_name} {other.first_name}',
-            salary_day=max(self.salary_day, other),
+            salary_day=max(self.salary_day, other.salary_day),
             tech_stack=list(set(self.tech_stack + other.tech_stack))
         )
