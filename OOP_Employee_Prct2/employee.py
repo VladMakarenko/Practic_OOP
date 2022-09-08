@@ -1,8 +1,7 @@
 from datetime import date, datetime
+from exception import EmailAlreadyExistsException
 
 import numpy as np
-
-from ООП.OOP_Employee_Prct2.exception import EmailAlreadyExistsException
 
 
 class Employee:
@@ -53,9 +52,9 @@ class Employee:
 
     def save_email(self):
         with open('emails.txt', 'a+') as fe:
-            fe.write(self.email + '\n')
+            fe.write(self.email.lower() + '\n')
 
     def validate(self):
         with open('emails.txt', 'r') as read_file:
-            if self.email in read_file.read():
+            if self.email.lower() in read_file.read():
                 raise EmailAlreadyExistsException('Email is already taken!')
