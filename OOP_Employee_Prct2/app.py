@@ -5,6 +5,7 @@ import employee
 from employee import Employee
 import rec_dev
 from exception import EmailAlreadyExistsException
+from candidates import *
 
 
 # print(Employee.work())
@@ -50,3 +51,22 @@ if __name__ == '__main__':
         log_message = f'{datetime.now()} \n {traceback.format_exc()}\n'
         with open('logs.txt', 'a+') as lf:
             lf.write(log_message)
+    print('[=================================================================================================]')
+if __name__ == '__main__':
+    stepanov = Candidate('Stepan', 'Stepanov', 'stepka@gmail.com',
+                                    ['Java', 'js', 'python'], 'python', 'middle')
+    print(stepanov.__dict__)
+    print('[=================================================================================================]')
+
+    candidates = Candidate.generate_candidates('candidates.csv')
+    [print(x.__dict__) for x in candidates]
+    for x in candidates:
+        print(x.get_full_name)
+    print('[=================================================================================================]')
+
+    candidates = Candidate.generate_candidates(
+        'https://bitbucket.org/ivnukov/lesson2/raw/4f59074e6fbb552398f87636b5bf089a1618da0a/candidates.csv'
+    )
+    [print(x.__dict__) for x in candidates]
+    for x in candidates:
+        print(x.get_full_name)
